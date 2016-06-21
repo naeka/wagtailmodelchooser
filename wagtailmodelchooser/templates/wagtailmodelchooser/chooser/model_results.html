@@ -1,0 +1,30 @@
+{% load i18n %}
+{% if object_list %}
+    {% if is_searching %}
+        <h2>
+        {% blocktrans count counter=object_list.paginator.count %}
+            There is one match
+        {% plural %}
+            There are {{ counter }} matches
+        {% endblocktrans %}
+        </h2>
+    {% else %}
+        <h2>
+            {% blocktrans %}
+                Latest {{ model_verbose_name }}
+            {% endblocktrans %}
+        </h2>
+    {% endif %}
+
+    {% block result_list %}
+        {% include "wagtailmodelchooser/models/list.html" %}
+    {% endblock result_list %}
+
+    {% include "wagtailadmin/shared/pagination_nav.html" with items=object_list is_ajax=1 %}
+{% else %}
+    <p>
+        {% blocktrans %}
+            Sorry, no {{ model_verbose_name_plural }} match "<em>{{ query_string }}</em>"
+        {% endblocktrans %}
+    </p>
+{% endif %}

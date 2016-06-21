@@ -1,0 +1,20 @@
+{% load i18n wagtailmodelchooser_tags %}
+<table class="listing">
+    <col />
+    <col  />
+    <col width="16%" />
+    <thead>
+        <tr class="table-headers">
+            <th>{% trans "Title" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for instance in object_list %}
+            <tr>
+                <td class="title">
+                    <h2><a href="{% url model_chosen_url_name instance.id %}" class="model-choice">{{ instance|getattr:view.title_field }}</a></h2>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
