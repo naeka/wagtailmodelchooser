@@ -1,9 +1,12 @@
-{% load i18n %}
+{% load i18n wagtailmodelchooser_tags %}
 
 {% comment %}
     TODO: Should use blocktrans.asvar instead as soon as Django 1.8 support is dropped
 {% endcomment %}
-{% trans "Choose a" %} {{ model_verbose_name }}
+{% captureas choose_str %}
+    {% trans "Choose a" %} {{ model_verbose_name }}
+{% endcaptureas %}
+
 
 {% block header %}
     {% include "wagtailadmin/shared/header.html" with title=choose_str tabbed=1 merged=1 icon="doc-full-inverse" %}
