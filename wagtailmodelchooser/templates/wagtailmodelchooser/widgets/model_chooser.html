@@ -1,0 +1,7 @@
+{% extends "wagtailadmin/widgets/chooser.html" %}
+{% load wagtailmodelchooser_tags %}
+{% block chooser_class %}model-chooser{% endblock %}
+
+{% block chosen_state_view %}
+    <span class="title">{{ instance|getattr:title_field }}</span>
+{% endblock %}

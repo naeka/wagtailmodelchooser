@@ -1,0 +1,5 @@
+site_name: wagtailmodelchooser
+site_description: Wagtail chooser panel generator for generic Django models
+repo_url: https://github.com/Naeka/wagtailmodelchooser
+site_dir: docs/html
+theme: readthedocs

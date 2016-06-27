@@ -1,0 +1,33 @@
+{% load i18n wagtailmodelchooser_tags %}
+
+{% comment %}
+    TODO: Should use blocktrans.asvar instead as soon as Django 1.8 support is dropped
+{% endcomment %}
+{% captureas choose_str %}
+    {% trans "Choose a" %} {{ model_verbose_name }}
+{% endcaptureas %}
+
+
+{% block header %}
+    {% include "wagtailadmin/shared/header.html" with title=choose_str tabbed=1 merged=1 icon="doc-full-inverse" %}
+{% endblock header %}
+
+
+<div class="tab-content">
+    {% block tab_content %}
+        <section id="search" class="active nice-padding">
+            <form class="model-search search-bar" action="{% url model_chooser_url_name %}" method="GET">
+                <ul class="fields">
+                    {% for field in searchform %}
+                        {% include "wagtailadmin/shared/field_as_li.html" with field=field %}
+                    {% endfor %}
+                </ul>
+            </form>
+            <div id="search-results" class="listing instances">
+                {% block results %}
+                    {% include "wagtailmodelchooser/chooser/model_results.html" %}
+                {% endblock results %}
+            </div>
+        </section>
+    {% endblock tab_content %}
+</div>

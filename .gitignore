@@ -63,6 +63,9 @@ instance/
 # Sphinx documentation
 docs/_build/
 
+# Mkdocs documentation
+docs/html/
+
 # PyBuilder
 target/
 
