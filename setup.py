@@ -65,7 +65,7 @@ if sys.argv[-1] == 'publish':
 
 
 install_requires = [
-    'Django>=1.8.1,<1.10',
+    'Django>=1.8.1,<1.11',
     'wagtail>=1.5',
 ]
 
@@ -118,5 +118,6 @@ setup(
         'Framework :: Django',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
+        'Framework :: Django :: 1.10',
     ]
 )
