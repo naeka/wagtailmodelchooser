@@ -20,6 +20,7 @@ def get_model_data(cls, instance, title_field):
 class ModelChooserView(ListView):
     template_name = 'wagtailmodelchooser/chooser/model_chooser.html'
     results_template_name = 'wagtailmodelchooser/chooser/model_results.html'
+    js_handler_template_name = 'wagtailmodelchooser/chooser/model_chooser.js'
     form_class = SearchForm
 
     def get_context_data(self, **kwargs):
@@ -52,8 +53,7 @@ class ModelChooserView(ListView):
         paginator, self.object_list = paginate(request, self.object_list, per_page=10)
         context = self.get_context_data(searchform=searchform)
 
-        return render_modal_workflow(
-            request, self.template_name, 'wagtailmodelchooser/chooser/model_chooser.js', context)
+        return render_modal_workflow(request, self.template_name, self.js_handler_template_name, context)
 
 
 class ModelChosenView(DetailView):
