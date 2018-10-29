@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
 import re
 import os
 import sys
@@ -65,16 +65,16 @@ if sys.argv[-1] == 'publish':
 
 
 install_requires = [
-    'Django>=1.8.1,<1.11',
-    'wagtail>=1.5',
+    'Django>=1.11,<2.2',
+    'wagtail>=2.2',
 ]
 
 # Testing dependencies
 testing_extras = [
     # Required for running the tests
-    'pytest-django>=2.9,<2.10',
-    'pytest>=2.9,<2.10',
-    'pytest-cov>=2.2',
+    'pytest-django>=3.2,<3.5',
+    'pytest>=3.6',
+    'pytest-cov>=2.5',
     'flake8>=2.4.0',
 
     # For PyPI installs
@@ -110,14 +110,13 @@ setup(
         'Operating System :: OS Independent',
         'Natural Language :: English',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
+        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
     ]
 )

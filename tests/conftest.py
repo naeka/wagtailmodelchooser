@@ -33,12 +33,14 @@ def pytest_configure():
                 },
             }
         ],
-        MIDDLEWARE_CLASSES=(
-            'django.middleware.common.CommonMiddleware',
+        MIDDLEWARE=(
+            'django.middleware.security.SecurityMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.middleware.common.CommonMiddleware',
             'django.middleware.csrf.CsrfViewMiddleware',
             'django.contrib.auth.middleware.AuthenticationMiddleware',
             'django.contrib.messages.middleware.MessageMiddleware',
+            'django.middleware.clickjacking.XFrameOptionsMiddleware',
         ),
         INSTALLED_APPS=(
             'django.contrib.auth',
@@ -48,7 +50,17 @@ def pytest_configure():
             'django.contrib.messages',
             'django.contrib.staticfiles',
 
-            'wagtail',
+            'wagtail.contrib.forms',
+            'wagtail.contrib.redirects',
+            'wagtail.embeds',
+            'wagtail.sites',
+            'wagtail.users',
+            'wagtail.snippets',
+            'wagtail.documents',
+            'wagtail.images',
+            'wagtail.search',
+            'wagtail.admin',
+            'wagtail.core',
             'wagtailmodelchooser',
             'modelcluster',
             'taggit',

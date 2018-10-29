@@ -18,9 +18,9 @@ any model instance anywhere in the Wagtail admin.
 
 ## Requirements
 
-* Python (2.7, 3.4, 3.5)
-* Django (1.8, 1.9, 1.10)
-* Wagtail (1.5, 1.6)
+* Python (3.4, 3.5, 3.6)
+* Django (1.11, 2.0, 2.1)
+* Wagtail (2.2, 2.3)
 
 ## Installation
 

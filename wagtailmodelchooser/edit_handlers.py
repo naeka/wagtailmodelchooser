@@ -1,13 +1,11 @@
-from __future__ import absolute_import, unicode_literals
-
 from django.conf import settings
 from django.conf.urls import url
-from django.core import urlresolvers
 from django.db import models
+from django.urls import reverse
 from django.utils.html import format_html, format_html_join
 
-from wagtail.wagtailadmin.edit_handlers import BaseChooserPanel
-from wagtail.wagtailcore import hooks
+from wagtail.admin.edit_handlers import BaseChooserPanel
+from wagtail.core import hooks
 
 from .widgets import AdminModelChooser
 from .views import ModelChooserView, ModelChosenView
@@ -63,7 +61,7 @@ class ModelChooserPanel(object):
             </script>
             """,
             cls.model._meta.object_name,
-            urlresolvers.reverse('{}_chooser'.format(cls.model._meta.model_name))
+            reverse('{}_chooser'.format(cls.model._meta.model_name))
         )
 
     @classmethod

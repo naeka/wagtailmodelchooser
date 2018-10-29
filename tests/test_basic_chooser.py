@@ -1,9 +1,7 @@
-from __future__ import absolute_import, unicode_literals
-
 import decimal
 import random
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 
 from wagtail.tests.utils import WagtailTestUtils
