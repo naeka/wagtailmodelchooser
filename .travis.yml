@@ -2,41 +2,57 @@ language: python
 
 sudo: false
 
-env:
-  matrix:
-    - TOX_ENV=py27-dj18-wagtail15
-    - TOX_ENV=py27-dj18-wagtail16
-    - TOX_ENV=py27-dj19-wagtail15
-    - TOX_ENV=py27-dj19-wagtail16
-    - TOX_ENV=py27-dj110-wagtail16
-    - TOX_ENV=py34-dj18-wagtail15
-    - TOX_ENV=py34-dj18-wagtail16
-    - TOX_ENV=py34-dj19-wagtail15
-    - TOX_ENV=py34-dj19-wagtail16
-    - TOX_ENV=py34-dj110-wagtail16
-
-# Python 3.5 has to go here until Travis adds it to the default build images.
-# https://github.com/travis-ci/travis-ci/issues/4794#issuecomment-143758799
 matrix:
   fast_finish: true
   include:
-    - python: 3.5
-      env: TOX_ENV=py35-dj18-wagtail15
-    - python: 3.5
-      env: TOX_ENV=py35-dj18-wagtail16
-    - python: 3.5
-      env: TOX_ENV=py35-dj19-wagtail15
-    - python: 3.5
-      env: TOX_ENV=py35-dj19-wagtail16
-    - python: 3.5
-      env: TOX_ENV=py35-dj110-wagtail16
-    - python: 3.5
-      env: TOX_ENV=flake8
-    - python: 3.5
-      env: TOX_ENV=docs
+   - env: TOXENV=py34-dj111-wagtail22
+     python: 3.4
+   - env: TOXENV=py34-dj111-wagtail23
+     python: 3.4
+   - env: TOXENV=py34-dj20-wagtail22
+     python: 3.4
+   - env: TOXENV=py34-dj20-wagtail23
+     python: 3.4
+   - env: TOXENV=py35-dj111-wagtail22
+     python: 3.5
+   - env: TOXENV=py35-dj111-wagtail23
+     python: 3.5
+   - env: TOXENV=py35-dj20-wagtail22
+     python: 3.5
+   - env: TOXENV=py35-dj20-wagtail23
+     python: 3.5
+   - env: TOXENV=py35-dj21-wagtail23
+     python: 3.5
+   - env: TOXENV=py36-dj111-wagtail22
+     python: 3.6
+   - env: TOXENV=py36-dj111-wagtail23
+     python: 3.6
+   - env: TOXENV=py36-dj20-wagtail22
+     python: 3.6
+   - env: TOXENV=py36-dj20-wagtail23
+     python: 3.6
+   - env: TOXENV=py36-dj21-wagtail23
+     python: 3.6
+   - env: TOXENV=py37-dj20-wagtail22
+     python: 3.7
+     dist: xenial
+     sudo: required
+   - env: TOXENV=py37-dj20-wagtail23
+     python: 3.7
+     dist: xenial
+     sudo: required
+   - env: TOXENV=py37-dj21-wagtail23
+     python: 3.7
+     dist: xenial
+     sudo: required
+   - env: TOXENV=flake8
+     python: 3.5
+   - env: TOXENV=docs
+     python: 3.5
+
 
 install:
   - pip install tox
 
 script:
-  - tox -e $TOX_ENV
+  - tox

@@ -1,11 +1,7 @@
-from __future__ import unicode_literals
-
 from django.db import models
 
 from wagtailmodelchooser.views import ModelChooserView, ModelChosenView
-from wagtailmodelchooser.edit_handlers import (
-    AdminModelChooser, BaseModelChooserPanel, ModelChooserPanel, register_chooser_for_model
-)
+from wagtailmodelchooser.edit_handlers import AdminModelChooser, ModelChooserPanel, register_chooser_for_model
 
 
 class Event(models.Model):
@@ -44,14 +40,10 @@ class AdminEventChooser(AdminModelChooser):
     title_field = 'title'
 
 
-class BaseEventChooserPanel(BaseModelChooserPanel):
-    object_type_name = 'event'
-    widget_class = AdminEventChooser
-
-
 class EventChooserPanel(ModelChooserPanel):
+    object_type_name = 'event'
     model = Event
-    base_class = BaseEventChooserPanel
+    widget_class = AdminEventChooser
     chooser_view = EventChooserView
     chosen_view = EventChosenView
 

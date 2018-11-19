@@ -1,12 +1,10 @@
-from __future__ import absolute_import, unicode_literals
-
 import json
 
 from django.views.generic import DetailView, ListView
 from django.shortcuts import render
 
-from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
-from wagtail.wagtailadmin.forms import SearchForm
+from wagtail.admin.modal_workflow import render_modal_workflow
+from wagtail.admin.forms import SearchForm
 from wagtail.utils.pagination import paginate
 
 

@@ -1,33 +1,25 @@
-from __future__ import absolute_import, unicode_literals
-
 from django.conf import settings
 from django.conf.urls import url
-from django.core import urlresolvers
 from django.db import models
+from django.urls import reverse
 from django.utils.html import format_html, format_html_join
 
-from wagtail.wagtailadmin.edit_handlers import BaseChooserPanel
-from wagtail.wagtailcore import hooks
+from wagtail.admin.edit_handlers import BaseChooserPanel
+from wagtail.core import hooks
 
 from .widgets import AdminModelChooser
 from .views import ModelChooserView, ModelChosenView
 
 
-class BaseModelChooserPanel(BaseChooserPanel):
-    @classmethod
-    def widget_overrides(cls):
-        return {cls.field_name: cls.widget_class}
+class ModelChooserPanel(BaseChooserPanel):
+    object_type_name = 'model'
+    widget_class = None
+    model = None
+    chooser_view = None
+    chosen_view = None
 
-
-class ModelChooserPanel(object):
-    def __init__(self, field_name):
-        self.field_name = field_name
-
-    def bind_to_model(self, model):
-        return type(str('_{}ChooserPanel'.format(model._meta.object_name)), (self.base_class,), {
-            'model': model,
-            'field_name': self.field_name,
-        })
+    def widget_overrides(self):
+        return {self.field_name: self.widget_class}
 
     @classmethod
     def register_with_wagtail(cls):
@@ -63,7 +55,7 @@ class ModelChooserPanel(object):
             </script>
             """,
             cls.model._meta.object_name,
-            urlresolvers.reverse('{}_chooser'.format(cls.model._meta.model_name))
+            reverse('{}_chooser'.format(cls.model._meta.model_name))
         )
 
     @classmethod
@@ -95,20 +87,6 @@ def register_chooser_for_model(
         }
         defaults.update(**widget_attrs)
         widget_class = type(str('Admin{}Chooser'.format(class_name)), (AdminModelChooser,), defaults)
-
-    # Check or build the chooser panel base class
-    if chooser_panel_base_class:
-        assert issubclass(chooser_panel_base_class, BaseModelChooserPanel), \
-            "chooser_panel_base_class must inherit from 'BaseModelChooserPanel'"
-        assert hasattr(chooser_panel_base_class, 'object_type_name'), \
-            "chooser_panel_base_class must define 'object_type_name'"
-        assert hasattr(chooser_panel_base_class, 'widget_class'), \
-            "chooser_panel_base_class must define 'widget_class'"
-    else:
-        chooser_panel_base_class = type(str('Base{}ChooserPanel'.format(class_name)), (BaseModelChooserPanel,), {
-            'object_type_name': model._meta.model_name,
-            'widget_class': widget_class,
-        })
 
     # Check or build the chooser view
     if chooser_view:
@@ -142,8 +120,9 @@ def register_chooser_for_model(
 
     # Build the chooser panel class
     chooser_panel_class = type(str('{}ChooserPanel'.format(class_name)), (ModelChooserPanel,), {
+        'object_type_name': model._meta.model_name,
+        'widget_class': widget_class,
         'model': model,
-        'base_class': chooser_panel_base_class,
         'chooser_view': chooser_view,
         'chosen_view': chosen_view,
     })

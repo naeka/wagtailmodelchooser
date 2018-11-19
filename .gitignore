@@ -65,6 +65,7 @@ docs/_build/
 
 # Mkdocs documentation
 docs/html/
+docs-build/
 
 # PyBuilder
 target/
